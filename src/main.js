@@ -538,7 +538,7 @@ function openDialogue(triggerData) {
     dialogueBox.closePrompt.setVisible(true);
 
     if (url) {
-        urlText.setText('Read more: ' + url);
+        urlText.setText('Read more →');
         urlText.setVisible(true);
         urlText.setInteractive({ useHandCursor: true });
         urlText.off('pointerdown');
