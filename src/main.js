@@ -80,6 +80,7 @@ function preload() {
     this.load.image('cannon', 'assets/tiles/cannon.png');
     this.load.image('statue', 'assets/tiles/statue.png');
     this.load.image('stone_tiles_v2.1', 'assets/tiles/stone_tiles_v2.1.png');
+    this.load.image('cannon32x', 'assets/tiles/cannon32x.png');
 
     // Load player sprite (8 columns x 4 rows, 32x64 per frame)
     this.load.spritesheet('player', 'assets/sprites/player.png', {
@@ -106,11 +107,12 @@ function create() {
     const cannonTiles = map.addTilesetImage('Cannon2', 'cannon');
     const statueTiles = map.addTilesetImage('Statue128', 'statue');
     const stoneTiles = map.addTilesetImage('stone_tiles_v2.1', 'stone_tiles_v2.1');
+    const cannon32xTiles = map.addTilesetImage('cannon32x', 'cannon32x');
 
     const allTilesets = [
         terrainTiles, pinkTiles, goldenrodTiles, lavenderTiles, blueTiles,
         whiteTiles, summerTiles, cityTiles, modernTiles, wallTiles,
-        cannonTiles, statueTiles, stoneTiles
+        cannonTiles, statueTiles, stoneTiles, cannon32xTiles
     ];
 
     // Create tile layers
