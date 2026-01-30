@@ -171,7 +171,8 @@ map.addTilesetImage('Modern_Exteriors_Complete_Tileset_32x32', 'modern_exteriors
 | Flowers | tilelayer | Flower decorations |
 | Playground | tilelayer | Playground equipment |
 | More Fencing | tilelayer | Additional fences |
-| Top Level | tilelayer | Elements that render above player |
+| Top Level | tilelayer | Elements that render above ground layers |
+| Tile Layer 8 | tilelayer | Cannon and statue (oversized custom tiles) |
 | Collision | tilelayer | **Not rendered** - marks blocked tiles |
 | Triggers | objectgroup | Rectangle zones with text/url properties |
 | playerSpawn | objectgroup | Player start position |
