@@ -94,6 +94,7 @@ function preload() {
 
     // Load trigger images
     this.load.image('BowlingClub.jpg', 'assets/images/BowlingClub.jpg');
+    this.load.image('Caspar.jpg', 'assets/images/Caspar.jpg');
 }
 
 function create() {

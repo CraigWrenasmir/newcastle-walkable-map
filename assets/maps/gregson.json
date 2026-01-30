@@ -20162,6 +20162,34 @@
               "value": "BowlingClub.jpg"
             }
           ]
+        },
+        {
+          "height": 157.803,
+          "id": 11,
+          "name": "Grand Caspar",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 126.59,
+          "x": 511.561,
+          "y": 672.832,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Caspar.jpg"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "A great tree named Grand Caspar fell here 23 April 2015"
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "value": "https://novacastria.tumblr.com/post/117155135413/grand-caspar-hamilton"
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -20196,7 +20224,7 @@
     }
   ],
   "nextlayerid": 11,
-  "nextobjectid": 9,
+  "nextobjectid": 12,
   "orientation": "orthogonal",
   "renderorder": "right-down",
   "tiledversion": "1.11.2",
