@@ -212,10 +212,6 @@ cd ~/projects/newcastle-walkable-map
 
 # Make changes to code or assets...
 
-# If map changed in Tiled:
-# 1. Export from Tiled as JSON (or re-run convert script)
-# 2. Copy new gregson.json to assets/maps/
-
 # Commit and push
 git add -A
 git commit -m "Description of changes"
@@ -223,6 +219,40 @@ git push
 
 # GitHub Pages auto-rebuilds (usually 1-2 minutes)
 ```
+
+---
+
+## Updating the Map from Tiled
+
+### Option A: Export directly from Tiled (easiest)
+
+1. Edit the map in Tiled: `/Users/craigsmith/Newcastle-Tiled/Assets/Gregson_v2.tmx`
+2. In Tiled: **File → Export As** → choose **JSON map files (*.json)**
+3. Save directly to: `~/projects/newcastle-walkable-map/assets/maps/gregson.json`
+4. Commit and push (or ask Claude to do it)
+
+### Option B: Use conversion script
+
+1. Edit and save the .tmx file in Tiled
+2. Run the conversion script (creates JSON from TMX):
+   ```bash
+   cd ~/projects/newcastle-walkable-map
+   node convert-map.js
+   ```
+   Note: The convert-map.js script is in .gitignore but exists locally
+3. Commit and push
+
+### What requires code changes
+
+| Change in Tiled | Code update needed? |
+|-----------------|---------------------|
+| Move/add/delete tiles | No - just re-export |
+| Add/edit triggers | No - just re-export (ensure `text` and optional `url` properties) |
+| Adjust collision layer | No - just re-export |
+| Move player spawn | No - just re-export |
+| **Add new tileset** | **Yes** - need to add image + update main.js |
+| **Rename a layer** | **Yes** - need to update layer names in main.js |
+| **Add new layer** | **Yes** - need to create layer in main.js |
 
 ---
 
