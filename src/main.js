@@ -120,6 +120,7 @@ function create() {
     const playgroundLayer = map.createLayer('Playground', allTilesets, 0, 0);
     const moreFencingLayer = map.createLayer('More Fencing', allTilesets, 0, 0);
     const topLayer = map.createLayer('Top Level', allTilesets, 0, 0);
+    const tileLayer8 = map.createLayer('Tile Layer 8', allTilesets, 0, 0);
     // Get collision layer data without rendering it
     const collisionLayerData = map.getLayer('Collision');
 
@@ -293,9 +294,12 @@ function create() {
     // Create dialogue UI (fixed to camera)
     createDialogueUI(this);
 
-    // Set top layer to render above player
+    // Set top layers depth
     if (topLayer) {
         topLayer.setDepth(10);
+    }
+    if (tileLayer8) {
+        tileLayer8.setDepth(11);
     }
 
     // Show welcome prompt
