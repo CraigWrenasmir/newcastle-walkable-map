@@ -20134,6 +20134,34 @@
               "value": "https://www.wrenasmir.com/the-glass-house"
             }
           ]
+        },
+        {
+          "height": 233.526,
+          "id": 8,
+          "name": "Bowling Club",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 277.457,
+          "x": 41.6185,
+          "y": 1130.06,
+          "properties": [
+            {
+              "name": "Text",
+              "type": "string",
+              "value": "The bowling club was demolished 9 July 2020"
+            },
+            {
+              "name": "URL",
+              "type": "string",
+              "value": "https://novacastria.tumblr.com/post/623134834046418944/bowling-club-hamilton"
+            },
+            {
+              "name": "image",
+              "type": "string",
+              "value": "BowlingClub.jpg"
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -20168,7 +20196,7 @@
     }
   ],
   "nextlayerid": 11,
-  "nextobjectid": 8,
+  "nextobjectid": 9,
   "orientation": "orthogonal",
   "renderorder": "right-down",
   "tiledversion": "1.11.2",

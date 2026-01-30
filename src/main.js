@@ -35,6 +35,10 @@ let dialogueText = null;
 let promptText = null;
 let isDialogueOpen = false;
 let urlText = null;
+let polaroidFrame = null;
+let polaroidImage = null;
+let polaroidCaption = null;
+let gameScene = null;
 
 const PLAYER_SPEED = 160;
 
@@ -87,6 +91,9 @@ function preload() {
         frameWidth: 32,
         frameHeight: 64
     });
+
+    // Load trigger images
+    this.load.image('BowlingClub.jpg', 'assets/images/BowlingClub.jpg');
 }
 
 function create() {
@@ -389,20 +396,45 @@ function update() {
 }
 
 function createDialogueUI(scene) {
-    // Create dialogue elements (initially hidden)
-    // These are added to a container that follows the camera
+    gameScene = scene;
 
+    // Create dialogue elements (initially hidden)
     const centerX = config.width / 2;
     const centerY = config.height - 100;
 
-    // Semi-transparent background
+    // Semi-transparent background (will resize when image present)
     dialogueBox = scene.add.rectangle(centerX, centerY, 700, 150, 0x1a1a2e, 0.95);
     dialogueBox.setStrokeStyle(3, 0x8b7355);
     dialogueBox.setScrollFactor(0);
     dialogueBox.setDepth(200);
     dialogueBox.setVisible(false);
 
-    // Dialogue text
+    // Polaroid frame (white rectangle with thicker bottom)
+    polaroidFrame = scene.add.rectangle(centerX, 200, 230, 280, 0xf5f5f0);
+    polaroidFrame.setStrokeStyle(2, 0xcccccc);
+    polaroidFrame.setScrollFactor(0);
+    polaroidFrame.setDepth(201);
+    polaroidFrame.setVisible(false);
+
+    // Polaroid image placeholder
+    polaroidImage = scene.add.image(centerX, 180, null);
+    polaroidImage.setScrollFactor(0);
+    polaroidImage.setDepth(202);
+    polaroidImage.setVisible(false);
+
+    // Polaroid caption (below image, inside frame)
+    polaroidCaption = scene.add.text(centerX, 305, '', {
+        font: '12px monospace',
+        fill: '#333333',
+        wordWrap: { width: 200 },
+        align: 'center'
+    });
+    polaroidCaption.setOrigin(0.5, 0.5);
+    polaroidCaption.setScrollFactor(0);
+    polaroidCaption.setDepth(202);
+    polaroidCaption.setVisible(false);
+
+    // Dialogue text (below polaroid or centered if no image)
     dialogueText = scene.add.text(centerX, centerY - 20, '', {
         font: '16px monospace',
         fill: '#e8d5b7',
@@ -462,8 +494,43 @@ function openDialogue(triggerData) {
     isDialogueOpen = true;
     hidePrompt();
 
-    const text = triggerData.properties.text || 'No text available.';
-    const url = triggerData.properties.url || null;
+    // Handle case-insensitive property names
+    const props = triggerData.properties;
+    const text = props.text || props.Text || 'No text available.';
+    const url = props.url || props.URL || null;
+    const image = props.image || props.Image || null;
+
+    const centerX = config.width / 2;
+
+    if (image && gameScene.textures.exists(image)) {
+        // Show polaroid with image
+        polaroidFrame.setVisible(true);
+        polaroidImage.setTexture(image);
+        polaroidImage.setDisplaySize(200, 200);
+        polaroidImage.setVisible(true);
+
+        // Caption on polaroid (use trigger name)
+        polaroidCaption.setText(triggerData.name || '');
+        polaroidCaption.setVisible(true);
+
+        // Position dialogue box below polaroid
+        dialogueBox.setPosition(centerX, 480);
+        dialogueBox.setSize(700, 130);
+        dialogueText.setPosition(centerX, 460);
+        urlText.setPosition(centerX, 500);
+        dialogueBox.closePrompt.setPosition(centerX, 530);
+    } else {
+        // No image - center the dialogue
+        polaroidFrame.setVisible(false);
+        polaroidImage.setVisible(false);
+        polaroidCaption.setVisible(false);
+
+        dialogueBox.setPosition(centerX, config.height / 2);
+        dialogueBox.setSize(700, 150);
+        dialogueText.setPosition(centerX, config.height / 2 - 20);
+        urlText.setPosition(centerX, config.height / 2 + 35);
+        dialogueBox.closePrompt.setPosition(centerX, config.height / 2 + 60);
+    }
 
     dialogueBox.setVisible(true);
     dialogueText.setText(text);
@@ -491,6 +558,9 @@ function closeDialogue() {
     dialogueText.setVisible(false);
     urlText.setVisible(false);
     dialogueBox.closePrompt.setVisible(false);
+    polaroidFrame.setVisible(false);
+    polaroidImage.setVisible(false);
+    polaroidCaption.setVisible(false);
 
     if (currentTrigger) {
         showPrompt('Press E to read');
