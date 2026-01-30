@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node
+node_modules/
+
+# Build tools
+convert-map.js
+
+# Editor
+*.swp
+*.swo
+.idea/
+.vscode/
