@@ -2,7 +2,7 @@
 // A walkable literary archive
 
 const config = {
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS, // Use Canvas to avoid WebGL texture size limits
     width: 800,
     height: 600,
     parent: 'game-container',
@@ -231,7 +231,7 @@ function create() {
     player.setSize(20, 24);
     player.setOffset(6, 40); // Collision box at feet
     player.direction = 'down';
-    player.setDepth(5); // Above ground layers, below top layer
+    player.setDepth(100); // Above all tile layers
 
     // Set up collision with collision bodies
     if (this.collisionBodies) {
@@ -393,7 +393,7 @@ function createDialogueUI(scene) {
     dialogueBox = scene.add.rectangle(centerX, centerY, 700, 150, 0x1a1a2e, 0.95);
     dialogueBox.setStrokeStyle(3, 0x8b7355);
     dialogueBox.setScrollFactor(0);
-    dialogueBox.setDepth(100);
+    dialogueBox.setDepth(200);
     dialogueBox.setVisible(false);
 
     // Dialogue text
@@ -405,7 +405,7 @@ function createDialogueUI(scene) {
     });
     dialogueText.setOrigin(0.5, 0.5);
     dialogueText.setScrollFactor(0);
-    dialogueText.setDepth(101);
+    dialogueText.setDepth(201);
     dialogueText.setVisible(false);
 
     // URL text (clickable link indicator)
@@ -416,7 +416,7 @@ function createDialogueUI(scene) {
     });
     urlText.setOrigin(0.5, 0.5);
     urlText.setScrollFactor(0);
-    urlText.setDepth(101);
+    urlText.setDepth(201);
     urlText.setVisible(false);
 
     // Close prompt
@@ -426,7 +426,7 @@ function createDialogueUI(scene) {
     });
     closePrompt.setOrigin(0.5, 0.5);
     closePrompt.setScrollFactor(0);
-    closePrompt.setDepth(101);
+    closePrompt.setDepth(201);
     closePrompt.setVisible(false);
     dialogueBox.closePrompt = closePrompt;
 
@@ -439,7 +439,7 @@ function createDialogueUI(scene) {
     });
     promptText.setOrigin(0.5, 0.5);
     promptText.setScrollFactor(0);
-    promptText.setDepth(100);
+    promptText.setDepth(200);
     promptText.setVisible(false);
 }
 
