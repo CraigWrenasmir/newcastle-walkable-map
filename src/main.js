@@ -50,7 +50,7 @@ function preload() {
     progressBox.fillRect(240, 270, 320, 50);
 
     const loadingText = this.add.text(400, 250, 'Loading Gregson Park...', {
-        font: '20px monospace',
+        font: '24px monospace',
         fill: '#ffffff'
     });
     loadingText.setOrigin(0.5, 0.5);
@@ -424,7 +424,7 @@ function createDialogueUI(scene) {
 
     // Polaroid caption (below image, inside frame)
     polaroidCaption = scene.add.text(centerX, 305, '', {
-        font: '12px monospace',
+        font: '18px monospace',
         fill: '#333333',
         wordWrap: { width: 200 },
         align: 'center'
@@ -436,7 +436,7 @@ function createDialogueUI(scene) {
 
     // Dialogue text (below polaroid or centered if no image)
     dialogueText = scene.add.text(centerX, centerY - 20, '', {
-        font: '16px monospace',
+        font: '22px monospace',
         fill: '#e8d5b7',
         wordWrap: { width: 650 },
         align: 'center'
@@ -448,7 +448,7 @@ function createDialogueUI(scene) {
 
     // URL text (clickable link indicator)
     urlText = scene.add.text(centerX, centerY + 35, '', {
-        font: '14px monospace',
+        font: '24px monospace',
         fill: '#6b9bd1',
         fontStyle: 'italic'
     });
@@ -459,7 +459,7 @@ function createDialogueUI(scene) {
 
     // Close prompt
     const closePrompt = scene.add.text(centerX, centerY + 60, 'Press ESC to close', {
-        font: '12px monospace',
+        font: '18px monospace',
         fill: '#888888'
     });
     closePrompt.setOrigin(0.5, 0.5);
@@ -470,7 +470,7 @@ function createDialogueUI(scene) {
 
     // Prompt text (for "Press E to read")
     promptText = scene.add.text(centerX, config.height - 50, '', {
-        font: '14px monospace',
+        font: '24px monospace',
         fill: '#e8d5b7',
         backgroundColor: '#1a1a2e',
         padding: { x: 10, y: 5 }
