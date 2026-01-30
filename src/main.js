@@ -239,7 +239,7 @@ function create() {
 
     // Set up camera to follow player
     this.cameras.main.startFollow(player, true, 0.1, 0.1);
-    this.cameras.main.setZoom(2);
+    this.cameras.main.setZoom(1);
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
     // Set world bounds
