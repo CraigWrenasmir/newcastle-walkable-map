@@ -289,6 +289,45 @@ git push
 
 ---
 
+## Future Architecture: Multi-Area City
+
+### Planned Approach: Multiple Maps with Portals
+
+The city will be built as **multiple neighborhood-sized maps in one repo**, connected by portals.
+
+**Why not one massive map:**
+- Tiled becomes unwieldy with very large maps
+- Browser memory limits / crash risk
+- Long load times (everything loads upfront)
+- Harder to work on incrementally
+
+**Structure:**
+```
+assets/maps/
+  gregson-park.json      (current)
+  hamilton-south.json    (future)
+  beaumont-street.json   (future)
+  honeysuckle.json       (future)
+  ...
+```
+
+**Portal system (to implement later):**
+1. "Portals" object layer in Tiled
+2. Rectangle objects at map edges with properties:
+   - `target_map`: "hamilton-south"
+   - `spawn_point`: "from-gregson"
+3. Player walks into portal → transition effect → new map loads
+4. Player appears at designated spawn point
+
+**Benefits:**
+- Each area loads quickly
+- Work on neighborhoods independently
+- Shared assets (tilesets, sprites, images)
+- One repo, one URL
+- Natural psychogeographic feel - distinct spaces with conscious transitions
+
+---
+
 ## Future Optimizations
 
 ### Priority 1: Reduce Modern Exteriors Tileset Size
