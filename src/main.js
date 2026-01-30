@@ -39,6 +39,8 @@ let polaroidFrame = null;
 let polaroidImage = null;
 let polaroidCaption = null;
 let gameScene = null;
+let playerExclamation = null;
+let triggerMarkers = [];
 
 const PLAYER_SPEED = 160;
 
@@ -261,7 +263,9 @@ function create() {
                 obj.width,
                 obj.height
             );
-            trigger.setStrokeStyle(0); // Invisible
+            trigger.setStrokeStyle(0);
+            trigger.setFillStyle(0x000000, 0); // Fully transparent
+            trigger.setVisible(false); // Completely invisible
             this.physics.add.existing(trigger, true);
 
             // Store trigger data
@@ -277,8 +281,32 @@ function create() {
             }
 
             triggers.push(trigger);
+
+            // Add floating marker at trigger location
+            const marker = this.add.circle(
+                obj.x + obj.width / 2,
+                obj.y + obj.height / 2 - 20,
+                8,
+                0xf4e99b,
+                0.8
+            );
+            marker.setStrokeStyle(2, 0xd4a574);
+            marker.setDepth(50);
+            marker.originalY = marker.y;
+            triggerMarkers.push(marker);
         });
     }
+
+    // Create exclamation mark for player (hidden initially)
+    playerExclamation = this.add.text(0, 0, '!', {
+        font: 'bold 28px monospace',
+        fill: '#ffeb3b',
+        stroke: '#000000',
+        strokeThickness: 4
+    });
+    playerExclamation.setOrigin(0.5, 1);
+    playerExclamation.setDepth(101);
+    playerExclamation.setVisible(false);
 
     // Set up camera to follow player
     this.cameras.main.startFollow(player, true, 0.1, 0.1);
@@ -370,6 +398,13 @@ function update() {
         player.anims.play('idle-' + player.direction, true);
     }
 
+    // Animate floating markers (gentle bob)
+    const time = this.time.now;
+    triggerMarkers.forEach(marker => {
+        marker.y = marker.originalY + Math.sin(time / 400) * 4;
+        marker.alpha = 0.6 + Math.sin(time / 300) * 0.2;
+    });
+
     // Check for trigger overlaps
     let nearTrigger = null;
     const playerBounds = player.getBounds();
@@ -385,9 +420,16 @@ function update() {
         currentTrigger = nearTrigger;
         if (currentTrigger) {
             showPrompt('Press E to read');
+            playerExclamation.setVisible(true);
         } else {
             hidePrompt();
+            playerExclamation.setVisible(false);
         }
+    }
+
+    // Position exclamation mark above player
+    if (playerExclamation.visible) {
+        playerExclamation.setPosition(player.x, player.y - 40);
     }
 
     // Check for E key to open dialogue
