@@ -140,6 +140,22 @@ map.addTilesetImage('Modern_Exteriors_Complete_Tileset_32x32', 'modern_exteriors
 //                   ^ must match JSON exactly              ^ Phaser load key
 ```
 
+### 7. Oversized Custom Tiles
+
+**Problem**: Custom tiles larger than 32×32 (e.g., 64×64 Cannon, 128×128 Statue) cause rendering issues when mixed with 32×32 tiles in the same tileset array.
+
+**Solution**: Use standard 32×32 tiles. If you need larger sprites, consider:
+- Creating them from multiple 32×32 tiles
+- Using sprite objects instead of tiles
+
+### 8. Trigger Visual Indicators
+
+Triggers use two visual cues:
+- **Floating markers**: Golden orbs that bob gently at trigger locations (depth 50)
+- **Player exclamation**: Yellow "!" above player's head when in trigger zone (depth 101)
+
+The trigger rectangles themselves are completely invisible (no stroke, no fill, setVisible false).
+
 ---
 
 ## Current Tilesets
@@ -157,8 +173,9 @@ map.addTilesetImage('Modern_Exteriors_Complete_Tileset_32x32', 'modern_exteriors
 | Modern_Exteriors_Complete_Tileset_32x32 | modern_exteriors.png | 658 | **HUGE** - trees, buildings, etc. |
 | iron stone wall 16x32 | iron_stone_wall.png | 91122 | Fence walls |
 | Cannon2 | cannon.png | 91131 | 64×64 tile |
-| Statue128 | statue.png | 91132 | 128×128 tile |
+| Statue128 | statue.png | 91132 | 128×128 tile (may not render correctly) |
 | stone_tiles_v2.1 | stone_tiles_v2.1.png | 91133 | Stone paths |
+| cannon32x | cannon32x.png | varies | 32×32 cannon tiles (replacement for oversized Cannon2) |
 
 ---
 
@@ -184,17 +201,32 @@ map.addTilesetImage('Modern_Exteriors_Complete_Tileset_32x32', 'modern_exteriors
 Triggers are rectangle objects in Tiled with custom properties:
 
 ```
-Object name: "greenhouse"
+Object name: "Bowling Club"
 Properties:
-  - text: "The Glass House used to be here."
-  - url: "https://www.wrenasmir.com/the-glass-house" (optional)
+  - text (or Text): "The bowling club was demolished 9 July 2020"
+  - url (or URL): "https://example.com/article" (optional)
+  - image: "BowlingClub.jpg" (optional)
 ```
 
 **In-game behavior**:
-- Player overlaps trigger zone → "Press E to read" prompt appears
-- Press E → Dialogue box shows text
-- If URL exists → Clickable link appears
+- Floating golden marker bobs at each trigger location (visible from distance)
+- Player enters trigger zone → Yellow "!" appears above their head
+- "Press E to read" prompt appears
+- Press E → Dialogue box shows content:
+  - If image exists → Polaroid-style frame with photo, trigger name as caption
+  - Text appears below
+  - "Read more →" link if URL exists (clickable)
 - Press ESC → Close dialogue
+
+**Adding images to triggers**:
+1. Create 200×200 pixel image (PNG or JPG)
+2. Give image to Claude to copy to `assets/images/`
+3. Add `image` property in Tiled with filename (e.g., `BowlingClub.jpg`)
+4. Claude must also add the image to preload in main.js
+
+**Current trigger images**:
+- `assets/images/BowlingClub.jpg`
+- `assets/images/Caspar.jpg`
 
 ---
 
@@ -308,13 +340,23 @@ Target: 20× larger or more
 1. Open Gregson_v2.tmx in Tiled
 2. Select the "Triggers" object layer
 3. Draw a rectangle where you want the trigger
-4. Set object name (e.g., "memorial")
-5. Add custom properties:
+4. Set object name (e.g., "Memorial")
+5. Add custom properties (click "+" in Properties panel, choose "string"):
    - `text` (string): The passage to display
    - `url` (string, optional): Link to full essay
-6. Save and export as JSON
-7. Copy JSON to assets/maps/gregson.json
-8. Commit and push
+   - `image` (string, optional): Filename of image (e.g., `Memorial.jpg`)
+6. Save the TMX file
+7. Tell Claude "I've updated the map" - Claude will convert and push
+
+## Quick Reference: Adding a Trigger Image
+
+1. Create 200×200 pixel image (PNG or JPG)
+2. Save to Downloads folder
+3. Tell Claude the filename (e.g., "I've added Memorial.jpg to Downloads")
+4. Claude will:
+   - Copy image to `assets/images/`
+   - Add it to preload in main.js
+   - Convert and push the map
 
 ---
 
