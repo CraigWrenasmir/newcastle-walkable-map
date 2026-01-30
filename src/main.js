@@ -81,10 +81,10 @@ function preload() {
     this.load.image('statue', 'assets/tiles/statue.png');
     this.load.image('stone_tiles_v2.1', 'assets/tiles/stone_tiles_v2.1.png');
 
-    // Load player sprite (8x8 grid, 32x32 per frame)
+    // Load player sprite (8 columns x 4 rows, 32x64 per frame)
     this.load.spritesheet('player', 'assets/sprites/player.png', {
         frameWidth: 32,
-        frameHeight: 32
+        frameHeight: 64
     });
 }
 
@@ -120,12 +120,32 @@ function create() {
     const playgroundLayer = map.createLayer('Playground', allTilesets, 0, 0);
     const moreFencingLayer = map.createLayer('More Fencing', allTilesets, 0, 0);
     const topLayer = map.createLayer('Top Level', allTilesets, 0, 0);
-    collisionLayer = map.createLayer('Collision', allTilesets, 0, 0);
+    // Get collision layer data without rendering it
+    const collisionLayerData = map.getLayer('Collision');
 
-    // Make collision layer invisible but collidable
-    if (collisionLayer) {
-        collisionLayer.setVisible(false);
-        collisionLayer.setCollisionByExclusion([-1, 0]);
+    // Create invisible collision bodies from the collision layer tiles
+    if (collisionLayerData) {
+        const tileWidth = map.tileWidth;
+        const tileHeight = map.tileHeight;
+
+        collisionLayerData.data.forEach((row, y) => {
+            row.forEach((tile, x) => {
+                if (tile.index !== -1 && tile.index !== 0) {
+                    // Create an invisible static physics body for this tile
+                    const collisionRect = this.add.rectangle(
+                        x * tileWidth + tileWidth / 2,
+                        y * tileHeight + tileHeight / 2,
+                        tileWidth,
+                        tileHeight
+                    );
+                    collisionRect.setVisible(false);
+                    this.physics.add.existing(collisionRect, true); // true = static
+
+                    if (!this.collisionBodies) this.collisionBodies = [];
+                    this.collisionBodies.push(collisionRect);
+                }
+            });
+        });
     }
 
     // Set layer depths so player renders correctly
@@ -147,9 +167,11 @@ function create() {
     }
 
     // Create player animations
-    // The sprite sheet is 8 columns x 8 rows
-    // Assuming: rows 0-1 = down, rows 2-3 = up, rows 4-5 = left, rows 6-7 = right
-    // Using first 4 frames of each pair for walking animation
+    // The sprite sheet is 8 columns x 4 rows (32x64 per frame)
+    // Row 0 (frames 0-7): Down
+    // Row 1 (frames 8-15): Up
+    // Row 2 (frames 16-23): Right
+    // Row 3 (frames 24-31): Left
 
     this.anims.create({
         key: 'walk-down',
@@ -160,6 +182,13 @@ function create() {
 
     this.anims.create({
         key: 'walk-up',
+        frames: this.anims.generateFrameNumbers('player', { start: 8, end: 15 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'walk-right',
         frames: this.anims.generateFrameNumbers('player', { start: 16, end: 23 }),
         frameRate: 10,
         repeat: -1
@@ -167,14 +196,7 @@ function create() {
 
     this.anims.create({
         key: 'walk-left',
-        frames: this.anims.generateFrameNumbers('player', { start: 32, end: 39 }),
-        frameRate: 10,
-        repeat: -1
-    });
-
-    this.anims.create({
-        key: 'walk-right',
-        frames: this.anims.generateFrameNumbers('player', { start: 48, end: 55 }),
+        frames: this.anims.generateFrameNumbers('player', { start: 24, end: 31 }),
         frameRate: 10,
         repeat: -1
     });
@@ -187,33 +209,35 @@ function create() {
 
     this.anims.create({
         key: 'idle-up',
+        frames: [{ key: 'player', frame: 8 }],
+        frameRate: 1
+    });
+
+    this.anims.create({
+        key: 'idle-right',
         frames: [{ key: 'player', frame: 16 }],
         frameRate: 1
     });
 
     this.anims.create({
         key: 'idle-left',
-        frames: [{ key: 'player', frame: 32 }],
+        frames: [{ key: 'player', frame: 24 }],
         frameRate: 1
     });
 
-    this.anims.create({
-        key: 'idle-right',
-        frames: [{ key: 'player', frame: 48 }],
-        frameRate: 1
-    });
-
-    // Create player sprite
+    // Create player sprite (32x64)
     player = this.physics.add.sprite(spawnX, spawnY, 'player');
     player.setCollideWorldBounds(false);
-    player.setSize(20, 20);
-    player.setOffset(6, 12);
+    player.setSize(20, 24);
+    player.setOffset(6, 40); // Collision box at feet
     player.direction = 'down';
     player.setDepth(5); // Above ground layers, below top layer
 
-    // Set up collision with collision layer
-    if (collisionLayer) {
-        this.physics.add.collider(player, collisionLayer);
+    // Set up collision with collision bodies
+    if (this.collisionBodies) {
+        this.collisionBodies.forEach(body => {
+            this.physics.add.collider(player, body);
+        });
     }
 
     // Get triggers from object layer
