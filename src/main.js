@@ -103,8 +103,8 @@ function create() {
     const cityTiles = map.addTilesetImage('City Tilemap', 'city_tilemap');
     const modernTiles = map.addTilesetImage('Modern_Exteriors_Complete_Tileset_32x32', 'modern_exteriors');
     const wallTiles = map.addTilesetImage('iron stone wall 16x32', 'iron_stone_wall');
-    const cannonTiles = map.addTilesetImage('Cannon2', 'cannon', 64, 64);
-    const statueTiles = map.addTilesetImage('Statue128', 'statue', 128, 128);
+    const cannonTiles = map.addTilesetImage('Cannon2', 'cannon');
+    const statueTiles = map.addTilesetImage('Statue128', 'statue');
     const stoneTiles = map.addTilesetImage('stone_tiles_v2.1', 'stone_tiles_v2.1');
 
     const allTilesets = [
