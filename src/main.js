@@ -124,9 +124,16 @@ function create() {
 
     // Make collision layer invisible but collidable
     if (collisionLayer) {
-        collisionLayer.setAlpha(0);
+        collisionLayer.setVisible(false);
         collisionLayer.setCollisionByExclusion([-1, 0]);
     }
+
+    // Set layer depths so player renders correctly
+    if (groundLayer) groundLayer.setDepth(0);
+    if (fenceLayer) fenceLayer.setDepth(1);
+    if (flowersLayer) flowersLayer.setDepth(2);
+    if (playgroundLayer) playgroundLayer.setDepth(3);
+    if (moreFencingLayer) moreFencingLayer.setDepth(4);
 
     // Get player spawn point from object layer
     const spawnLayer = map.getObjectLayer('playerSpawn');
@@ -202,6 +209,7 @@ function create() {
     player.setSize(20, 20);
     player.setOffset(6, 12);
     player.direction = 'down';
+    player.setDepth(5); // Above ground layers, below top layer
 
     // Set up collision with collision layer
     if (collisionLayer) {
