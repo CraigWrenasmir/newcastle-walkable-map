@@ -84,7 +84,6 @@ function preload() {
     this.load.image('modern_exteriors', 'assets/tiles/modern_exteriors.png');
     this.load.image('iron_stone_wall', 'assets/tiles/iron_stone_wall.png');
     this.load.image('cannon', 'assets/tiles/cannon.png');
-    this.load.image('statue', 'assets/tiles/statue.png');
     this.load.image('stone_tiles_v2.1', 'assets/tiles/stone_tiles_v2.1.png');
     this.load.image('cannon32x', 'assets/tiles/cannon32x.png');
 
@@ -127,14 +126,13 @@ function create() {
     const modernTiles = map.addTilesetImage('Modern_Exteriors_Complete_Tileset_32x32', 'modern_exteriors');
     const wallTiles = map.addTilesetImage('iron stone wall 16x32', 'iron_stone_wall');
     const cannonTiles = map.addTilesetImage('Cannon2', 'cannon');
-    const statueTiles = map.addTilesetImage('Statue128', 'statue');
     const stoneTiles = map.addTilesetImage('stone_tiles_v2.1', 'stone_tiles_v2.1');
     const cannon32xTiles = map.addTilesetImage('cannon32x', 'cannon32x');
 
     const allTilesets = [
         terrainTiles, pinkTiles, goldenrodTiles, lavenderTiles, blueTiles,
         whiteTiles, summerTiles, cityTiles, modernTiles, wallTiles,
-        cannonTiles, statueTiles, stoneTiles, cannon32xTiles
+        cannonTiles, stoneTiles, cannon32xTiles
     ];
 
     // Create tile layers

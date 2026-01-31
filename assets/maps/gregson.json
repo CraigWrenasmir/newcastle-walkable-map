@@ -3485,7 +3485,7 @@
         0,
         0,
         0,
-        91132,
+        0,
         17,
         17,
         0,
@@ -7369,13 +7369,13 @@
           ]
         },
         {
-          "height": 157.803,
+          "height": 146.795,
           "id": 11,
           "name": "Grand Caspar",
           "rotation": 0,
           "type": "",
           "visible": true,
-          "width": 126.59,
+          "width": 133.195,
           "x": 511.561,
           "y": 32.832,
           "properties": [
@@ -7535,13 +7535,13 @@
           ]
         },
         {
-          "height": 90.4898,
+          "height": 55.263,
           "id": 18,
           "name": "Heart",
           "rotation": 0,
           "type": "",
           "visible": true,
-          "width": 116.177,
+          "width": 111.774,
           "x": 36.1959,
           "y": 787.99,
           "properties": [
@@ -7553,7 +7553,7 @@
             {
               "name": "text",
               "type": "string",
-              "value": "A large branch broke and left a heart. "
+              "value": "A large branch broke and left a heart. 22 December 2025. "
             }
           ]
         },
@@ -7566,7 +7566,7 @@
           "visible": true,
           "width": 222.43,
           "x": 417.421,
-          "y": 555.63,
+          "y": 571.042,
           "properties": [
             {
               "name": "image",
@@ -7589,7 +7589,7 @@
           "visible": true,
           "width": 148.702,
           "x": 454.947,
-          "y": 196.749,
+          "y": 205.556,
           "properties": [
             {
               "name": "image",
@@ -7650,7 +7650,7 @@
           ]
         },
         {
-          "height": 156.499,
+          "height": 123.474,
           "id": 23,
           "name": "Cannons",
           "rotation": 0,
@@ -7899,19 +7899,6 @@
       "tilecount": 1,
       "tileheight": 64,
       "tilewidth": 64
-    },
-    {
-      "columns": 1,
-      "firstgid": 91132,
-      "image": "../tiles/statue.png",
-      "imageheight": 128,
-      "imagewidth": 128,
-      "margin": 0,
-      "name": "Statue128",
-      "spacing": 0,
-      "tilecount": 1,
-      "tileheight": 128,
-      "tilewidth": 128
     },
     {
       "columns": 8,
