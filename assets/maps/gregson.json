@@ -16559,9 +16559,9 @@
         0,
         0,
         0,
-        91219,
-        91220,
-        91221,
+        91213,
+        91214,
+        91215,
         0,
         0,
         0,
@@ -16609,9 +16609,9 @@
         0,
         0,
         0,
-        91222,
-        91223,
-        91224,
+        91216,
+        91217,
+        91218,
         0,
         0,
         0,
@@ -16759,6 +16759,9 @@
         0,
         0,
         0,
+        91213,
+        91214,
+        91215,
         0,
         0,
         0,
@@ -16806,12 +16809,12 @@
         0,
         0,
         0,
+        91216,
+        91217,
+        91218,
         0,
         0,
         0,
-        91219,
-        91220,
-        91221,
         0,
         0,
         0,
@@ -16859,9 +16862,6 @@
         0,
         0,
         0,
-        91222,
-        91223,
-        91224,
         0,
         0,
         0,
@@ -19372,9 +19372,9 @@
         0,
         0,
         0,
-        91142,
-        91142,
-        91142,
+        0,
+        0,
+        0,
         91142,
         0,
         0,
@@ -20124,9 +20124,14 @@
           "y": 803.218,
           "properties": [
             {
+              "name": "image",
+              "type": "string",
+              "value": "GlassHouse_Tiled.jpg"
+            },
+            {
               "name": "text",
               "type": "string",
-              "value": "The Glass House used to be here."
+              "value": "The Glass House used to be here. It was demolished 15 July 2025."
             },
             {
               "name": "url",
@@ -20136,20 +20141,20 @@
           ]
         },
         {
-          "height": 233.526,
+          "height": 131.214,
           "id": 8,
           "name": "Bowling Club",
           "rotation": 0,
           "type": "",
           "visible": true,
-          "width": 277.457,
+          "width": 275.145,
           "x": 41.6185,
           "y": 1130.06,
           "properties": [
             {
               "name": "Text",
               "type": "string",
-              "value": "The bowling club was demolished 9 July 2020"
+              "value": "The Hamilton Bowling Club was demolished 9 July 2020."
             },
             {
               "name": "URL",
@@ -20190,6 +20195,328 @@
               "value": "https://novacastria.tumblr.com/post/117155135413/grand-caspar-hamilton"
             }
           ]
+        },
+        {
+          "height": 97.6879,
+          "id": 12,
+          "name": "Bowling Club 2",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 212.139,
+          "x": 42.7746,
+          "y": 1278.61,
+          "properties": [
+            {
+              "name": "URL",
+              "type": "string",
+              "value": "https://vimeo.com/wrenasmir/hbc"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "A piece of music written for the closure of the Hamilton Bowling Club."
+            }
+          ]
+        },
+        {
+          "height": 58.9595,
+          "id": 13,
+          "name": "",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 95.9538,
+          "x": 160.694,
+          "y": 1505.78,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Wedding.png"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "A wedding in the park. 27 June 2015."
+            }
+          ]
+        },
+        {
+          "height": 71.808,
+          "id": 14,
+          "name": "Under Water",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 61.8834,
+          "x": 256.291,
+          "y": 693.561,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Water.jpg"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Under water after a big storm. 5 June 2016."
+            }
+          ]
+        },
+        {
+          "height": 100,
+          "id": 15,
+          "name": "Flowers",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 227.1,
+          "x": 416.253,
+          "y": 1088.8,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Smile.png"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "A smiley flowerbed. 13 August 2021."
+            }
+          ]
+        },
+        {
+          "height": 58.9643,
+          "id": 16,
+          "name": "Night",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 158.211,
+          "x": 708.74,
+          "y": 1130.25,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Night.png"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "The park at night. 20 August 2023"
+            }
+          ]
+        },
+        {
+          "height": 62.4672,
+          "id": 17,
+          "name": "Cone",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 62.4672,
+          "x": 545.274,
+          "y": 1503.3,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Cone.png"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "A traffic cone in a tree. 10 March 2025."
+            }
+          ]
+        },
+        {
+          "height": 90.4898,
+          "id": 18,
+          "name": "Heart",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 116.177,
+          "x": 36.1959,
+          "y": 1427.99,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Heart.png"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "A large branch broke and left a heart at the breakpoint. "
+            }
+          ]
+        },
+        {
+          "height": 85.8194,
+          "id": 19,
+          "name": "Dog",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 222.43,
+          "x": 417.421,
+          "y": 1195.63,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Dog.png"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "My dog Jonsi loves the flowers."
+            }
+          ]
+        },
+        {
+          "height": 94.8477,
+          "id": 20,
+          "name": "Roof",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 148.702,
+          "x": 454.947,
+          "y": 836.749,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Roof.png"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Renovation of the old shelter area. 10 June 2024."
+            }
+          ]
+        },
+        {
+          "height": 150.309,
+          "id": 21,
+          "name": "Gates",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 138.253,
+          "x": 820.674,
+          "y": 1449.24,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Gates.jpg"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "The gates commemorate the first council of Hamilton, 11 December 1871."
+            }
+          ]
+        },
+        {
+          "height": 66.8541,
+          "id": 22,
+          "name": "Fence",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 129.91,
+          "x": 5.31794,
+          "y": 1523.97,
+          "properties": [
+            {
+              "name": "text",
+              "type": "string",
+              "value": "The fence was damaged in a big storm on 21 April 2015."
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "value": "https://novacastria.tumblr.com/post/117037660013/gregson-rising-hamilton"
+            }
+          ]
+        },
+        {
+          "height": 156.499,
+          "id": 23,
+          "name": "Cannons",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 125.351,
+          "x": 800.729,
+          "y": 961.787,
+          "properties": [
+            {
+              "name": "image",
+              "type": "string",
+              "value": "Cannons.png"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "In 1905 these two cannons were placed here. They were made in the 1840s."
+            }
+          ]
+        },
+        {
+          "height": 250,
+          "id": 24,
+          "name": "History",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 211.958,
+          "x": 300,
+          "y": 1350,
+          "properties": [
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Ruth Cotton's 'Hidden Hamilton' blog post on Gregson Park."
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "value": "https://hiddenhamilton.blogspot.com/2015/10/as-gift-it-wasntquite-all-it-seemed.html"
+            }
+          ]
+        },
+        {
+          "height": 121.553,
+          "id": 25,
+          "name": "Duel",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 157.259,
+          "x": 669.3,
+          "y": 676.897,
+          "properties": [
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Ye olde duel. 18 March 2023."
+            },
+            {
+              "name": "video",
+              "type": "string",
+              "value": "SwordFight.mp4"
+            }
+          ]
         }
       ],
       "opacity": 1,
@@ -20224,7 +20551,7 @@
     }
   ],
   "nextlayerid": 11,
-  "nextobjectid": 12,
+  "nextobjectid": 26,
   "orientation": "orthogonal",
   "renderorder": "right-down",
   "tiledversion": "1.11.2",

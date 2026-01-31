@@ -41,6 +41,7 @@ let polaroidCaption = null;
 let gameScene = null;
 let playerExclamation = null;
 let triggerMarkers = [];
+let polaroidVideo = null;
 
 const PLAYER_SPEED = 160;
 
@@ -97,6 +98,20 @@ function preload() {
     // Load trigger images
     this.load.image('BowlingClub.jpg', 'assets/images/BowlingClub.jpg');
     this.load.image('Caspar.jpg', 'assets/images/Caspar.jpg');
+    this.load.image('GlassHouse_Tiled.jpg', 'assets/images/GlassHouse_Tiled.jpg');
+    this.load.image('Wedding.png', 'assets/images/Wedding.png');
+    this.load.image('Water.jpg', 'assets/images/Water.jpg');
+    this.load.image('Smile.png', 'assets/images/Smile.png');
+    this.load.image('Night.png', 'assets/images/Night.png');
+    this.load.image('Cone.png', 'assets/images/Cone.png');
+    this.load.image('Heart.png', 'assets/images/Heart.png');
+    this.load.image('Dog.png', 'assets/images/Dog.png');
+    this.load.image('Roof.png', 'assets/images/Roof.png');
+    this.load.image('Gates.jpg', 'assets/images/Gates.jpg');
+    this.load.image('Cannons.png', 'assets/images/Cannons.png');
+
+    // Load trigger videos
+    this.load.video('SwordFight.mp4', 'assets/videos/SwordFight.mp4');
 }
 
 function create() {
@@ -465,6 +480,12 @@ function createDialogueUI(scene) {
     polaroidImage.setDepth(202);
     polaroidImage.setVisible(false);
 
+    // Polaroid video placeholder
+    polaroidVideo = scene.add.video(centerX, 180);
+    polaroidVideo.setScrollFactor(0);
+    polaroidVideo.setDepth(202);
+    polaroidVideo.setVisible(false);
+
     // Polaroid caption (below image, inside frame)
     polaroidCaption = scene.add.text(centerX, 305, '', {
         font: '18px monospace',
@@ -542,10 +563,36 @@ function openDialogue(triggerData) {
     const text = props.text || props.Text || 'No text available.';
     const url = props.url || props.URL || null;
     const image = props.image || props.Image || null;
+    const video = props.video || props.Video || null;
 
     const centerX = config.width / 2;
 
-    if (image && gameScene.textures.exists(image)) {
+    // Hide both image and video initially
+    polaroidImage.setVisible(false);
+    polaroidVideo.setVisible(false);
+    if (polaroidVideo.isPlaying && polaroidVideo.isPlaying()) {
+        polaroidVideo.stop();
+    }
+
+    if (video && gameScene.cache.video.exists(video)) {
+        // Show polaroid with video
+        polaroidFrame.setVisible(true);
+        polaroidVideo.setVisible(true);
+        polaroidVideo.loadURL('assets/videos/' + video);
+        polaroidVideo.setDisplaySize(200, 200);
+        polaroidVideo.play(true); // true = loop
+
+        // Caption on polaroid (use trigger name)
+        polaroidCaption.setText(triggerData.name || '');
+        polaroidCaption.setVisible(true);
+
+        // Position dialogue box below polaroid
+        dialogueBox.setPosition(centerX, 480);
+        dialogueBox.setSize(700, 130);
+        dialogueText.setPosition(centerX, 460);
+        urlText.setPosition(centerX, 500);
+        dialogueBox.closePrompt.setPosition(centerX, 530);
+    } else if (image && gameScene.textures.exists(image)) {
         // Show polaroid with image
         polaroidFrame.setVisible(true);
         polaroidImage.setTexture(image);
@@ -563,9 +610,8 @@ function openDialogue(triggerData) {
         urlText.setPosition(centerX, 500);
         dialogueBox.closePrompt.setPosition(centerX, 530);
     } else {
-        // No image - center the dialogue
+        // No image or video - center the dialogue
         polaroidFrame.setVisible(false);
-        polaroidImage.setVisible(false);
         polaroidCaption.setVisible(false);
 
         dialogueBox.setPosition(centerX, config.height / 2);
@@ -604,6 +650,12 @@ function closeDialogue() {
     polaroidFrame.setVisible(false);
     polaroidImage.setVisible(false);
     polaroidCaption.setVisible(false);
+
+    // Stop and hide video
+    if (polaroidVideo) {
+        polaroidVideo.stop();
+        polaroidVideo.setVisible(false);
+    }
 
     if (currentTrigger) {
         showPrompt('Press E to read');
