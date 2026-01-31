@@ -570,17 +570,23 @@ function openDialogue(triggerData) {
     // Hide both image and video initially
     polaroidImage.setVisible(false);
     polaroidVideo.setVisible(false);
-    if (polaroidVideo.isPlaying && polaroidVideo.isPlaying()) {
+    try {
         polaroidVideo.stop();
+    } catch (e) {
+        // Video may not be playing
     }
 
-    if (video && gameScene.cache.video.exists(video)) {
+    if (video) {
         // Show polaroid with video
         polaroidFrame.setVisible(true);
         polaroidVideo.setVisible(true);
-        polaroidVideo.loadURL('assets/videos/' + video);
-        polaroidVideo.setDisplaySize(200, 200);
-        polaroidVideo.play(true); // true = loop
+        try {
+            polaroidVideo.play(video, true); // key, loop=true
+            polaroidVideo.setDisplaySize(200, 200);
+        } catch (e) {
+            console.log('Video error:', e);
+            polaroidVideo.setVisible(false);
+        }
 
         // Caption on polaroid (use trigger name)
         polaroidCaption.setText(triggerData.name || '');
@@ -653,7 +659,11 @@ function closeDialogue() {
 
     // Stop and hide video
     if (polaroidVideo) {
-        polaroidVideo.stop();
+        try {
+            polaroidVideo.stop();
+        } catch (e) {
+            // Video may not be playing
+        }
         polaroidVideo.setVisible(false);
     }
 
