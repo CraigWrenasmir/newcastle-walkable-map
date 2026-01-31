@@ -41,6 +41,13 @@ let polaroidCaption = null;
 let gameScene = null;
 let playerExclamation = null;
 let triggerMarkers = [];
+let welcomeOverlay = null;
+let welcomeBox = null;
+let welcomeTitle = null;
+let welcomeDescription = null;
+let welcomeLink = null;
+let welcomePrompt = null;
+let isWelcomeOpen = false;
 
 const PLAYER_SPEED = 160;
 
@@ -350,16 +357,15 @@ function create() {
         tileLayer8.setDepth(11);
     }
 
-    // Show welcome prompt
-    showPrompt('Arrow keys or WASD to move');
-    setTimeout(() => {
-        if (!isDialogueOpen && currentTrigger === null) {
-            hidePrompt();
-        }
-    }, 3000);
+    // Show welcome popup
+    createWelcomeUI(this);
 }
 
 function update() {
+    if (isWelcomeOpen) {
+        return;
+    }
+
     if (isDialogueOpen) {
         // Check for ESC to close dialogue
         if (Phaser.Input.Keyboard.JustDown(keyEsc)) {
@@ -532,6 +538,96 @@ function createDialogueUI(scene) {
     promptText.setScrollFactor(0);
     promptText.setDepth(200);
     promptText.setVisible(false);
+}
+
+function createWelcomeUI(scene) {
+    const centerX = config.width / 2;
+    const centerY = config.height / 2;
+
+    // Dark overlay
+    welcomeOverlay = scene.add.rectangle(centerX, centerY, config.width, config.height, 0x000000, 0.7);
+    welcomeOverlay.setScrollFactor(0);
+    welcomeOverlay.setDepth(300);
+
+    // Welcome box
+    welcomeBox = scene.add.rectangle(centerX, centerY, 500, 320, 0x1a1a2e, 0.98);
+    welcomeBox.setStrokeStyle(3, 0x8b7355);
+    welcomeBox.setScrollFactor(0);
+    welcomeBox.setDepth(301);
+
+    // Title
+    welcomeTitle = scene.add.text(centerX, centerY - 110, 'Play Newcastle - Gregson Park', {
+        font: 'bold 28px monospace',
+        fill: '#e8d5b7'
+    });
+    welcomeTitle.setOrigin(0.5, 0.5);
+    welcomeTitle.setScrollFactor(0);
+    welcomeTitle.setDepth(302);
+
+    // Description
+    welcomeDescription = scene.add.text(centerX, centerY - 10,
+        'I am building a playable version of Newcastle\nto house the words, images and music\nI\'ve written about the city over the years.\n\nWe start in Gregson Park - more to follow soon.', {
+        font: '20px monospace',
+        fill: '#cccccc',
+        align: 'center',
+        lineSpacing: 8
+    });
+    welcomeDescription.setOrigin(0.5, 0.5);
+    welcomeDescription.setScrollFactor(0);
+    welcomeDescription.setDepth(302);
+
+    // Website link
+    welcomeLink = scene.add.text(centerX, centerY + 85, 'www.wrenasmir.com', {
+        font: '22px monospace',
+        fill: '#6b9bd1',
+        fontStyle: 'italic'
+    });
+    welcomeLink.setOrigin(0.5, 0.5);
+    welcomeLink.setScrollFactor(0);
+    welcomeLink.setDepth(302);
+    welcomeLink.setInteractive({ useHandCursor: true });
+    welcomeLink.on('pointerover', () => welcomeLink.setFill('#8bc4ff'));
+    welcomeLink.on('pointerout', () => welcomeLink.setFill('#6b9bd1'));
+    welcomeLink.on('pointerdown', () => {
+        window.open('https://www.wrenasmir.com', '_blank');
+    });
+
+    // Click to begin prompt
+    welcomePrompt = scene.add.text(centerX, centerY + 130, 'Click anywhere to begin', {
+        font: '18px monospace',
+        fill: '#888888'
+    });
+    welcomePrompt.setOrigin(0.5, 0.5);
+    welcomePrompt.setScrollFactor(0);
+    welcomePrompt.setDepth(302);
+
+    // Close on click (but not on the link)
+    welcomeOverlay.setInteractive();
+    welcomeBox.setInteractive();
+    welcomeOverlay.on('pointerdown', closeWelcome);
+    welcomeBox.on('pointerdown', closeWelcome);
+
+    isWelcomeOpen = true;
+}
+
+function closeWelcome() {
+    if (!isWelcomeOpen) return;
+    isWelcomeOpen = false;
+
+    welcomeOverlay.setVisible(false);
+    welcomeBox.setVisible(false);
+    welcomeTitle.setVisible(false);
+    welcomeDescription.setVisible(false);
+    welcomeLink.setVisible(false);
+    welcomePrompt.setVisible(false);
+
+    // Show movement prompt
+    showPrompt('Arrow keys or WASD to move');
+    setTimeout(() => {
+        if (!isDialogueOpen && currentTrigger === null) {
+            hidePrompt();
+        }
+    }, 3000);
 }
 
 function showPrompt(text) {
