@@ -3485,7 +3485,7 @@
         0,
         0,
         0,
-        0,
+        91132,
         17,
         17,
         0,
@@ -7497,7 +7497,7 @@
           "visible": true,
           "width": 158.211,
           "x": 708.74,
-          "y": 490.25,
+          "y": 534.283,
           "properties": [
             {
               "name": "image",
@@ -7623,6 +7623,11 @@
               "name": "text",
               "type": "string",
               "value": "The gates commemorate the first council of Hamilton, 11 December 1871."
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "value": "https://hiddenhamilton.blogspot.com/2015/10/as-gift-it-wasntquite-all-it-seemed.html"
             }
           ]
         },
@@ -7669,6 +7674,11 @@
               "name": "text",
               "type": "string",
               "value": "In 1905 these two cannons were placed in the park. They were made in the 1840s."
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "value": "https://navyhistory.au/historic-cannons-guarding-hamilton-rare-finds-at-gregson-park/"
             }
           ]
         },
@@ -7899,6 +7909,19 @@
       "tilecount": 1,
       "tileheight": 64,
       "tilewidth": 64
+    },
+    {
+      "columns": 1,
+      "firstgid": 91132,
+      "image": "../tiles/statue.png",
+      "imageheight": 128,
+      "imagewidth": 128,
+      "margin": 0,
+      "name": "Statue128",
+      "spacing": 0,
+      "tilecount": 1,
+      "tileheight": 128,
+      "tilewidth": 128
     },
     {
       "columns": 8,
