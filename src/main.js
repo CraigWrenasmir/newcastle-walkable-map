@@ -41,7 +41,6 @@ let polaroidCaption = null;
 let gameScene = null;
 let playerExclamation = null;
 let triggerMarkers = [];
-let polaroidVideo = null;
 
 const PLAYER_SPEED = 160;
 
@@ -109,9 +108,7 @@ function preload() {
     this.load.image('Roof.png', 'assets/images/Roof.png');
     this.load.image('Gates.jpg', 'assets/images/Gates.jpg');
     this.load.image('Cannons.png', 'assets/images/Cannons.png');
-
-    // Load trigger videos
-    this.load.video('SwordFight.mp4', 'assets/videos/SwordFight.mp4');
+    this.load.image('SwordFight_200.gif', 'assets/images/SwordFight_200.gif');
 }
 
 function create() {
@@ -480,12 +477,6 @@ function createDialogueUI(scene) {
     polaroidImage.setDepth(202);
     polaroidImage.setVisible(false);
 
-    // Polaroid video placeholder
-    polaroidVideo = scene.add.video(centerX, 180);
-    polaroidVideo.setScrollFactor(0);
-    polaroidVideo.setDepth(202);
-    polaroidVideo.setVisible(false);
-
     // Polaroid caption (below image, inside frame)
     polaroidCaption = scene.add.text(centerX, 305, '', {
         font: '18px monospace',
@@ -563,42 +554,13 @@ function openDialogue(triggerData) {
     const text = props.text || props.Text || 'No text available.';
     const url = props.url || props.URL || null;
     const image = props.image || props.Image || null;
-    const video = props.video || props.Video || null;
 
     const centerX = config.width / 2;
 
-    // Hide both image and video initially
+    // Hide image initially
     polaroidImage.setVisible(false);
-    polaroidVideo.setVisible(false);
-    try {
-        polaroidVideo.stop();
-    } catch (e) {
-        // Video may not be playing
-    }
 
-    if (video) {
-        // Show polaroid with video
-        polaroidFrame.setVisible(true);
-        polaroidVideo.setVisible(true);
-        try {
-            polaroidVideo.play(video, true); // key, loop=true
-            polaroidVideo.setDisplaySize(200, 200);
-        } catch (e) {
-            console.log('Video error:', e);
-            polaroidVideo.setVisible(false);
-        }
-
-        // Caption on polaroid (use trigger name)
-        polaroidCaption.setText(triggerData.name || '');
-        polaroidCaption.setVisible(true);
-
-        // Position dialogue box below polaroid
-        dialogueBox.setPosition(centerX, 480);
-        dialogueBox.setSize(700, 130);
-        dialogueText.setPosition(centerX, 460);
-        urlText.setPosition(centerX, 500);
-        dialogueBox.closePrompt.setPosition(centerX, 530);
-    } else if (image && gameScene.textures.exists(image)) {
+    if (image && gameScene.textures.exists(image)) {
         // Show polaroid with image
         polaroidFrame.setVisible(true);
         polaroidImage.setTexture(image);
@@ -656,16 +618,6 @@ function closeDialogue() {
     polaroidFrame.setVisible(false);
     polaroidImage.setVisible(false);
     polaroidCaption.setVisible(false);
-
-    // Stop and hide video
-    if (polaroidVideo) {
-        try {
-            polaroidVideo.stop();
-        } catch (e) {
-            // Video may not be playing
-        }
-        polaroidVideo.setVisible(false);
-    }
 
     if (currentTrigger) {
         showPrompt('Press E to read');
