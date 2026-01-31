@@ -567,10 +567,10 @@ function createWelcomeUI(scene) {
     // Description
     welcomeDescription = scene.add.text(centerX, centerY - 10,
         'I am building a playable version of Newcastle\nto house the words, images and music\nI\'ve written about the city over the years.\n\nWe start in Gregson Park - more to follow soon.', {
-        font: '20px monospace',
+        font: '16px monospace',
         fill: '#cccccc',
         align: 'center',
-        lineSpacing: 8
+        lineSpacing: 6
     });
     welcomeDescription.setOrigin(0.5, 0.5);
     welcomeDescription.setScrollFactor(0);
